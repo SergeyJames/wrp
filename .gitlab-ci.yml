@@ -3,8 +3,8 @@ before_script:
 
 build:
     script:
-        - pwd
-        - ./run/build.sh . Release
+        - dir=$(pwd)
+        - ./run/build.sh dir Release
 .test:default:
   script:
     - ./build/bin/unit_tests
