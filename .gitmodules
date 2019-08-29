@@ -1,0 +1,3 @@
+[submodule "src/include/algorithms"]
+	path = src/include/algorithms
+	url = ../algorithms.git
