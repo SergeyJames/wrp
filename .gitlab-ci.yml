@@ -3,7 +3,7 @@ before_script:
 
 build:
     script:
-        - cd wrp/
+        - pwd
         - ./run/build.sh . Release
 .test:default:
   script:
