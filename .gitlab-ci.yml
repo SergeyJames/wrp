@@ -4,4 +4,7 @@ before_script:
 build:
     script:
         - export dir=$(pwd)
-        - ./run/build.sh $dir Release
+        - mkdir build install
+        - cd build
+        - export BUILD_TYPE=RELEASE
+        - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
