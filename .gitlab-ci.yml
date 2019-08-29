@@ -4,7 +4,7 @@ before_script:
 build:
     script:
         - cd wrp/
-        - ./run/build.sh pwd Release
+        - ./run/build.sh . Release
 .test:default:
   script:
     - ./build/bin/unit_tests
