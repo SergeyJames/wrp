@@ -3,5 +3,7 @@ before_script:
 
 build:
     script:
-        - ./run/build.sh . Release
-  
+        - ./run/build.sh pwd Release
+.test:default:
+  script:
+    - ./build/bin/unit_tests
