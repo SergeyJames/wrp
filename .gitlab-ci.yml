@@ -2,16 +2,19 @@ stages:
   - build
   - test
 
+variables:
+  GIT_STRATEGY: clone
+  GIT_SUBMODULE_STRATEGY: recursive
+
 build:linux:rel:
     stage: build
     script:
-        - apt-get update -qq && apt-get install -y cmake gcc g++ git
+        - apt-get update -qq && apt-get install -y cmake gcc g++
         - export dir=$(pwd)
-        - git submodule update --init --recursive
         - mkdir build install
         - cd build
         - export BUILD_TYPE=Release
-        - cmake .. -DWRP_ROOT=../ -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+        - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
         - cmake --build . --config $BUILD_TYPE --target install
         - ./build/bin/unit_tests
 test:
