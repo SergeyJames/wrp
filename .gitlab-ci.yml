@@ -16,9 +16,6 @@ build:linux:rel:
         - export BUILD_TYPE=Release
         - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
         - cmake --build . --config $BUILD_TYPE --target install
-test:
-    stage: test
-    script:
-        - ls -lai
-        - ./build/bin/unit_tests
+        - ./bin/unit_tests
+
 
