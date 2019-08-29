@@ -4,8 +4,8 @@ before_script:
 build:
     script:
         - dir=$(pwd)
-        - ./run/build.sh dir Release
+        - ./run/build.sh $dir Release
 test:
   script:
-    - cd dir
+    - cd $dir
     - ./build/bin/unit_tests
