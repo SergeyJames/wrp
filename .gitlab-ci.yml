@@ -2,7 +2,6 @@ stages:
   - build
   - test
 
-
 build:linux:rel:
     stage: build
     script:
@@ -12,4 +11,10 @@ build:linux:rel:
         - cd build
         - export BUILD_TYPE=RELEASE
         - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
- 
+
+run-unit-test:
+    stage: test
+    script:
+        - cd $dir
+        - ./build/bin/unit_tests
+
