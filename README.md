@@ -1,3 +1,5 @@
+## gitlab  [![Build Status](https://gitlab.com/SergeyJames/wrp/badges/master/pipeline.svg)](https://gitlab.com/SergeyJames/wrp/)
+
 ## How to build bash v.1
 ```
 $ git clone --recursive https://github.com/SergeyJames/wrp.git
