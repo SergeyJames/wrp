@@ -1,5 +1,15 @@
-## How to build bash
+## How to build bash v.1
 ```
+$ git clone --recursive https://github.com/SergeyJames/wrp.git
+$ cd wrp/
+$ ./run/build.sh . Release
+$ ./build/bin/unit_tests
+```
+
+## How to build bash v.2
+```
+$ git clone --recursive https://github.com/SergeyJames/wrp.git
+$ cd wrp/
 $ mkdir build install
 $ cd build
 $ export BUILD_TYPE=RELEASE
@@ -15,8 +25,9 @@ $ cmake .. \
 
 ## Running the tests
 
-$ ./build/bin/unit_tests
-
+```
+$ ./bin/unit_tests
+```
 ```
 [==========] Running 2 tests from 1 test case.
 [----------] Global test environment set-up.
