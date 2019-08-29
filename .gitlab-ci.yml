@@ -8,14 +8,16 @@ build:linux:rel:
         - apt-get update -qq && apt-get install -y cmake gcc g++
         - export dir=$(pwd)
         - mkdir build install
+        - mkdir install
         - cd build
         - export BUILD_TYPE=RELEASE
         - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
-
-run-unit-test:
+        - cmake --build . --config $BUILD_TYPE -- -j12
+        - cmake --build . --target install
+        - ./build/bin/unit_tests
+test:
     stage: test
     script:
-        - cd $CI_PROJECT_DIR
         - ls -lai
         - ./build/bin/unit_tests
 
