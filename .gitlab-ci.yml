@@ -3,9 +3,9 @@ before_script:
 
 build:
     script:
-        - dir=$(pwd)
+        - export dir=$(pwd)
         - ./run/build.sh $dir Release
-test:
-  script:
-    - cd $dir
-    - ./build/bin/unit_tests
+  .test:
+    script:
+      - cd $dir
+      - ./build/bin/unit_tests
