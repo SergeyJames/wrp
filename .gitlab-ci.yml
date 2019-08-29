@@ -5,7 +5,3 @@ build:
     script:
         - export dir=$(pwd)
         - ./run/build.sh $dir Release
-  .test:
-    script:
-      - cd $dir
-      - ./build/bin/unit_tests
