@@ -5,6 +5,7 @@ build:
     script:
         - dir=$(pwd)
         - ./run/build.sh dir Release
-.test:default:
+test:
   script:
+    - cd dir
     - ./build/bin/unit_tests
