@@ -2,18 +2,14 @@ stages:
   - build
   - test
 
-before_script:
-  - apt-get update -qq && apt-get install -y cmake gcc g++
 
 build:linux:rel:
     stage: build
     script:
+        - apt-get update -qq && apt-get install -y cmake gcc g++
         - export dir=$(pwd)
         - mkdir build install
         - cd build
         - export BUILD_TYPE=RELEASE
         - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
-    stage: test
-    script:
-    - cd $dir
-    - ./build/bin/unit_tests
+ 
