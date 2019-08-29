@@ -15,6 +15,7 @@ build:linux:rel:
 run-unit-test:
     stage: test
     script:
+        - cd $CI_PROJECT_DIR
         - ls -lai
         - ./build/bin/unit_tests
 
