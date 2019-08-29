@@ -10,7 +10,7 @@ build:linux:rel:
         - mkdir build install
         - cd build
         - export BUILD_TYPE=Release
-        - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+        - cmake .. -DWRP_ROOT=../ -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
         - cmake --build . --config $BUILD_TYPE --target install
         - ./build/bin/unit_tests
 test:
