@@ -25,6 +25,11 @@ build:linux:rel:
       when: always
       paths:
         - "$CI_PROJECT_DIR/output.txt"
+after_success:
+    script:
+      - lcov --capture --directory . --output-file coverage.info
+      - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+      - lcov --list coverage.info # debug info
 
 build:linux:deb:
     stage: build
@@ -42,9 +47,9 @@ build:linux:deb:
       when: always
       paths:
         - "$CI_PROJECT_DIR/output.txt"
-
 after_success:
-  script:
-    - lcov --capture --directory . --output-file coverage.info
-    - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
-    - lcov --list coverage.info # debug info
+    script:
+      - lcov --capture --directory . --output-file coverage.info
+      - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+      - lcov --list coverage.info # debug info
+
