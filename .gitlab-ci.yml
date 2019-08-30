@@ -19,17 +19,16 @@ build:linux:rel:
         - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
         - cmake --build . --config $BUILD_TYPE --target install
         - ./bin/unit_tests
+        - cd build/
+        - lcov --capture --directory . --output-file coverage.info
+        - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+        - lcov --list coverage.info # debug info
     artifacts:
       name: "$(eval echo $BUILD_TYPE)"
       expire_in: 1 hour
       when: always
       paths:
         - "$CI_PROJECT_DIR/output.txt"
-after_success:
-    script:
-      - lcov --capture --directory . --output-file coverage.info
-      - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
-      - lcov --list coverage.info # debug info
 
 build:linux:deb:
     stage: build
@@ -41,15 +40,14 @@ build:linux:deb:
         - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
         - cmake --build . --config $BUILD_TYPE --target install
         - ./bin/unit_tests
+        - cd build/
+        - lcov --capture --directory . --output-file coverage.info
+        - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+        - lcov --list coverage.info # debug info
     artifacts:
       name: "$(eval echo $BUILD_TYPE)"
       expire_in: 1 hour
       when: always
       paths:
         - "$CI_PROJECT_DIR/output.txt"
-after_success:
-    script:
-      - lcov --capture --directory . --output-file coverage.info
-      - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
-      - lcov --list coverage.info # debug info
 
