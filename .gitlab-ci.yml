@@ -2,6 +2,9 @@ stages:
   - build
   - test
 
+before_script:
+  - apt-get update -qq && apt-get install -y cmake gcc g++ lcov
+
 variables:
   GIT_STRATEGY: clone
   GIT_SUBMODULE_STRATEGY: recursive
@@ -9,7 +12,6 @@ variables:
 build:linux:rel:
     stage: build
     script:
-        - apt-get update -qq && apt-get install -y cmake gcc g++
         - export dir=$(pwd)
         - mkdir build install
         - cd build
@@ -27,7 +29,6 @@ build:linux:rel:
 build:linux:deb:
     stage: build
     script:
-        - apt-get update -qq && apt-get install -y cmake gcc g++
         - export dir=$(pwd)
         - mkdir build install
         - cd build
@@ -42,10 +43,8 @@ build:linux:deb:
       paths:
         - "$CI_PROJECT_DIR/output.txt"
 
-
-test:
-    stage: test
-    script:
-        - ls -lai
-        - ./build/bin/unit_tests
-
+after_success:
+  script:
+    - lcov --capture --directory . --output-file coverage.info
+    - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+    - lcov --list coverage.info # debug info

@@ -7,7 +7,7 @@
             "type": "shell",
             "label": "build_all",
             "command": "${workspaceFolder}/run/build.sh",
-            "args": ["${workspaceFolder}", "Release" ],
+            "args": ["${workspaceFolder}", "Debug" ],
             "options": {
                 "cwd": "/bin"
             },
