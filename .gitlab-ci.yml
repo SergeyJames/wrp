@@ -19,7 +19,6 @@ build:linux:rel:
         - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
         - cmake --build . --config $BUILD_TYPE --target install
         - ./bin/unit_tests
-        - cd build/
         - lcov --capture --directory . --output-file coverage.info
         - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
         - lcov --list coverage.info # debug info
@@ -40,7 +39,6 @@ build:linux:deb:
         - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
         - cmake --build . --config $BUILD_TYPE --target install
         - ./bin/unit_tests
-        - cd build/
         - lcov --capture --directory . --output-file coverage.info
         - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
         - lcov --list coverage.info # debug info
