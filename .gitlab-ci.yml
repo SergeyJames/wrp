@@ -16,6 +16,36 @@ build:linux:rel:
         - export BUILD_TYPE=Release
         - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
         - cmake --build . --config $BUILD_TYPE --target install
-        - ./bin/unit_tests
+        - ./build/bin/unit_tests
+    artifacts:
+      name: "$(eval echo $BUILD_TYPE)"
+      expire_in: 1 hour
+      when: always
+      paths:
+        - "$CI_PROJECT_DIR/output.txt"
 
+build:linux:deb:
+    stage: build
+    script:
+        - apt-get update -qq && apt-get install -y cmake gcc g++
+        - export dir=$(pwd)
+        - mkdir build install
+        - cd build
+        - export BUILD_TYPE=Debug
+        - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+        - cmake --build . --config $BUILD_TYPE --target install
+        - ./build/bin/unit_tests
+    artifacts:
+      name: "$(eval echo $BUILD_TYPE)"
+      expire_in: 1 hour
+      when: always
+      paths:
+        - "$CI_PROJECT_DIR/output.txt"
+
+
+test:
+    stage: test
+    script:
+        - ls -lai
+        - ./build/bin/unit_tests
 
