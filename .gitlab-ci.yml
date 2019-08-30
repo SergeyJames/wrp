@@ -43,9 +43,3 @@ build:linux:deb:
         - "$CI_PROJECT_DIR/output.txt"
 
 
-test:
-    stage: test
-    script:
-        - ls -lai
-        - ./build/bin/unit_tests
-
