@@ -1,7 +1,6 @@
 cd $1
 mkdir build install
 cd build
-rm -rf *
 
 export BUILD_TYPE=$2
 export WRP_ROOT_ARG=$1

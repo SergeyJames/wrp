@@ -13,6 +13,7 @@ endif()
 set(CMAKE_CXX_STANDARD 17)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -save-temps")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lpthread")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
 
 include_directories("${WRP_ROOT}/src/include/")
 

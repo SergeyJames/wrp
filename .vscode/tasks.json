@@ -6,7 +6,12 @@
         {
             "type": "shell",
             "label": "build_all",
-            "command": "${workspaceFolder}/run/build.sh",
+            "windows": {
+                "command": "${workspaceFolder}\run\build.bat"
+            },
+            "linux": {
+                "command": "${workspaceFolder}/run/build.sh"
+            },
             "args": ["${workspaceFolder}", "Debug" ],
             "options": {
                 "cwd": "/bin"
