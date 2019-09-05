@@ -31,7 +31,7 @@ $ cmake .. \
 $ ./bin/unit_tests
 ```
 ```
-[==========] Running 2 tests from 1 test case.
+[==========] Running 3 tests from 2 test cases.
 [----------] Global test environment set-up.
 [----------] 2 tests from Algorithms
 [ RUN      ] Algorithms.contains
@@ -40,8 +40,12 @@ $ ./bin/unit_tests
 [       OK ] Algorithms.contains_if (0 ms)
 [----------] 2 tests from Algorithms (0 ms total)
 
-[----------] Global test environment tear-down
-[==========] 2 tests from 1 test case ran. (1 ms total)
-[  PASSED  ] 2 tests.
+[----------] 1 test from Utilities
+[ RUN      ] Utilities.isFirstDerivedOfSecond
+[       OK ] Utilities.isFirstDerivedOfSecond (0 ms)
+[----------] 1 test from Utilities (0 ms total)
 
+[----------] Global test environment tear-down
+[==========] 3 tests from 2 test cases ran. (0 ms total)
+[  PASSED  ] 3 tests.
 ```
