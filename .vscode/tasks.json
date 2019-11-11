@@ -1,23 +1,57 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "type": "shell",
-            "label": "build_all",
-            "windows": {
-                "command": "${workspaceFolder}\run\build.bat"
-            },
-            "linux": {
-                "command": "${workspaceFolder}/run/build.sh"
-            },
-            "args": ["${workspaceFolder}", "Debug" ],
-            "options": {
-                "cwd": "/bin"
-            },
-            "group": "build",
-            "problemMatcher": []
-        },
-    ]
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "rebuild_all",
+			"windows": {
+				"command": "${workspaceFolder}\\run\\build.bat",
+				"args": [
+					"${workspaceFolder}",
+					"Debug",
+					"12"
+				],
+			},
+			"linux": {
+				"command": "${workspaceFolder}/run/rebuild.sh",
+				"args": [
+					"${workspaceFolder}",
+					"Debug",
+					"12"
+				],
+				"options": {
+					"cwd": "/bin"
+				},
+			},
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"label": "build",
+			"windows": {
+				"command": "${workspaceFolder}\\run\\build.bat",
+				"args": [
+					"${workspaceFolder}",
+					"Debug",
+					"12"
+				],
+			},
+			"linux": {
+				"command": "${workspaceFolder}/run/build.sh",
+				"args": [
+					"${workspaceFolder}",
+					"Debug",
+					"12"
+				],
+				"options": {
+					"cwd": "/bin"
+				},
+			},
+			"group": "build",
+			"problemMatcher": []
+		},
+	]
 }

@@ -2,6 +2,7 @@ add_executable(
     unit_tests
     test_wrappers.cpp
     test_utilities.cpp
+    test_numeric.cpp
     main.cpp
     )
 

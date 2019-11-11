@@ -24,5 +24,8 @@
     "gtest-adapter.debugConfig": [
         "run_unit_tests"
     ],
-    "gtest-adapter.supportLocation": false
+	"gtest-adapter.supportLocation": false,
+	"files.associations": {
+		"chrono": "cpp"
+	}
 }
