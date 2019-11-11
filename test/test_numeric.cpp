@@ -1,6 +1,5 @@
 #include "gtest/gtest.h"
 #include "algorithms/numeric.h"
-#include <chrono>
 
 void test_int() {
 	std::vector<int> v{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -8,18 +7,8 @@ void test_int() {
 }
 
 void test_float() {
-	constexpr size_t size{ 10 };
-	std::vector<double> dv(size);
-	auto it = dv.begin();
-	for (size_t k = 0; k < size; ++k, ++it) {
-		auto start{ std::chrono::system_clock::now() };
-		for(size_t i = 0; i < 10'000; ++i) {
-			std::string qualityInfo = "";
-		}
-		*it = std::chrono::duration<double>(std::chrono::system_clock::now() - start).count();
-	}
-
-	ASSERT_NEAR(wrp::average(dv), 0.00119, 0.001);
+	std::vector<float> dv{ 0.01f, 0.03f, 0.6f, 0.058f, 0.87f, 1.2f, 0.123f, 0.89f, 0.00111f };
+	ASSERT_NEAR(wrp::average(dv), 0.420f, 0.001f);
 }
 
 TEST(Numeric, average)
