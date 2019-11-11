@@ -22,12 +22,12 @@ build:linux:rel:
         - lcov --capture --directory . --output-file coverage.info
         - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
         - lcov --list coverage.info # debug info
-    artifacts:
-      name: "$(eval echo $BUILD_TYPE)"
-      expire_in: 1 hour
-      when: always
-      paths:
-        - "$CI_PROJECT_DIR/output.txt"
+    # artifacts:
+    #   name: "$(eval echo $BUILD_TYPE)"
+    #   expire_in: 1 hour
+    #   when: always
+    #   paths:
+    #     - "$CI_PROJECT_DIR/output.txt"
 
 build:linux:deb:
     stage: build
