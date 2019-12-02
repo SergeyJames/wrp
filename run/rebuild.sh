@@ -8,7 +8,7 @@ fi
 
 export BUILD_TYPE=$2
 export WRP_ROOT_ARG=$1
-cmake .. \
+cmake ../ \
  -DWRP_ROOT=$WRP_ROOT_ARG \
  -DCMAKE_INSTALL_PREFIX=../install \
  -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
