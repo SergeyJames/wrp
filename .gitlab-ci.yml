@@ -8,6 +8,12 @@ before_script:
 variables:
   GIT_STRATEGY: clone
   GIT_SUBMODULE_STRATEGY: recursive
+  CMAKE_LINUX_DBG: >
+    -DCMAKE_CXX_FLAGS="-fsanitize=address  -fsanitize=leak -g"
+    -DCMAKE_C_FLAGS="-fsanitize=address  -fsanitize=leak -g"
+    -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address  -fsanitize=leak"
+    -DCMAKE_MODULE_LINKER_FLAGS="-fsanitize=address  -fsanitize=leak"
+
 
 build:linux:rel:
     stage: build
@@ -36,7 +42,7 @@ build:linux:deb:
         - mkdir build install
         - cd build
         - export BUILD_TYPE=Debug
-        - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+        - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE $CMAKE_LINUX_DBG
         - cmake --build . --config $BUILD_TYPE --target install
         - ./bin/unit_tests
         - lcov --capture --directory . --output-file coverage.info
