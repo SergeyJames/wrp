@@ -9,10 +9,16 @@ variables:
   GIT_STRATEGY: clone
   GIT_SUBMODULE_STRATEGY: recursive
   CMAKE_LINUX_DBG: >
-    -DCMAKE_CXX_FLAGS="-fsanitize=address -fsanitize=leak -g"
-    -DCMAKE_C_FLAGS="-fsanitize=address -fsanitize=leak -g"
-    -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address -fsanitize=leak"
-    -DCMAKE_MODULE_LINKER_FLAGS="-fsanitize=address  -fsanitize=leak"
+    -DCMAKE_CXX_FLAGS=-fsanitize=address
+    -DCMAKE_CXX_FLAGS=-fsanitize=leak
+    -DCMAKE_CXX_FLAGS=-g
+    -DCMAKE_C_FLAGS=-fsanitize=address
+    -DCMAKE_C_FLAGS=-fsanitize=leak
+    -DCMAKE_C_FLAGS=-g
+    -DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address
+    -DCMAKE_EXE_LINKER_FLAGS=-fsanitize=leak
+    -DCMAKE_MODULE_LINKER_FLAGS=-fsanitize=address
+    -DCMAKE_MODULE_LINKER_FLAGS=-fsanitize=leak
 
 
 build:linux:rel:
