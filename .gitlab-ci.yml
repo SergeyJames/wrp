@@ -42,7 +42,7 @@ build:linux:deb:
         - mkdir build install
         - cd build
         - export BUILD_TYPE=Debug
-        - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE $CMAKE_LINUX_DBG
+        - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE $(eval echo $CMAKE_LINUX_DBG)
         - cmake --build . --config $BUILD_TYPE --target install
         - ./bin/unit_tests
         - lcov --capture --directory . --output-file coverage.info
