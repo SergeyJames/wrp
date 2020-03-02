@@ -1,3 +1,9 @@
+#!/bin/bash
+if [ "$#" -ne 3 ]; then
+	echo -e "\e[91m[ERROR:$2] Illegal number of parameters!\e[0m"
+	exit -1
+fi
+
 if [ -d $1/build ]; then
     cd $1/build
     rm -rf *
