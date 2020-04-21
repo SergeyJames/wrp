@@ -19,7 +19,26 @@
 				"args": [
 					"${workspaceFolder}",
 					"Debug",
-					"12"
+					"4",
+					"rebuild"
+				],
+				"options": {
+					"cwd": "/bin"
+				},
+			},
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"label": "continue",
+			"linux": {
+				"command": "${workspaceFolder}/run/rebuild.sh",
+				"args": [
+					"${workspaceFolder}",
+					"Debug",
+					"4",
+					"continue"
 				],
 				"options": {
 					"cwd": "/bin"

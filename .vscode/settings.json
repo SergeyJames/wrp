@@ -78,6 +78,10 @@
 		"stdexcept": "cpp",
 		"streambuf": "cpp",
 		"cinttypes": "cpp",
-		"typeinfo": "cpp"
+		"typeinfo": "cpp",
+		"thread": "cpp",
+		"cstring": "cpp",
+		"ratio": "cpp",
+		"typeindex": "cpp"
 	}
 }
