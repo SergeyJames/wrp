@@ -71,6 +71,22 @@
 			},
 			"group": "build",
 			"problemMatcher": []
+		},{
+			"type": "shell",
+			"label": "rebuild_PVS",
+			"linux": {
+				"command": "${workspaceFolder}/run/rebuild_PVS.sh",
+				"args": [
+					"${workspaceFolder}",
+					"Debug",
+					"12"
+				],
+				"options": {
+					"cwd": "/bin"
+				},
+			},
+			"group": "build",
+			"problemMatcher": []
 		},
 	]
 }
