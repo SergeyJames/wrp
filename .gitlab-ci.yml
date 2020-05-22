@@ -3,7 +3,19 @@ stages:
   - test
 
 before_script:
-  - apt-get update -qq && apt-get install -y cmake gcc g++ lcov
+  linux:
+    script:
+      - uname -a
+      - apt-get update -qq && apt-get install -y cmake gcc g++ lcov
+  windows:
+      script:
+      - systeminfo
+  debian:
+    script:
+      - uname -a
+
+
+before_script:
 
 variables:
   GIT_STRATEGY: clone
@@ -67,13 +79,10 @@ build:windows:rel:
     stage: build
     tags: ['windows']
     script:
-        - export dir=$(pwd)
+        - SET dir=%cd%
         - mkdir build install
         - cd build
-        - export BUILD_TYPE=Release
-        - cmake ../ -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
-        - cmake --build . --config $BUILD_TYPE --target install
-        - ./bin/unit_tests
-        - lcov --capture --directory . --output-file coverage.info
-        - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
-        - lcov --list coverage.info # debug info
+        - SET BUILD_TYPE=Release
+        - cmake ../ -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=%BUILD_TYPE%
+        - cmake --build . --config %BUILD_TYPE% --target install
+        - .\bin\unit_tests
