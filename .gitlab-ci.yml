@@ -3,13 +3,13 @@ stages:
   - test
 
 before_script:
-  build:linux:rel:
-  build:linux:dbg:
-    script:
-        - uname -a
-        - apt-get update -qq && apt-get install -y cmake gcc g++ lcov
-  windows:
-      script:
+  linux:rel:
+      - uname -a
+      - apt-get update -qq && apt-get install -y cmake gcc g++ lcov
+  build:linux:deb:
+      - uname -a
+      - apt-get update -qq && apt-get install -y cmake gcc g++ lcov
+  windows:rel:
       - systeminfo
   debian:
     script:
