@@ -2,21 +2,19 @@ stages:
   - build
   - test
 
-before_script:
-  build:linux:rel:
-  build:linux:dbg:
-    script:
-        - uname -a
-        - apt-get update -qq && apt-get install -y cmake gcc g++ lcov
-  windows:
-      script:
-      - systeminfo
-  debian:
-    script:
-      - uname -a
+build:linux:deb:
+  before_script:
+    - uname -a
+    - apt-get update -qq && apt-get install -y cmake gcc g++ lcov
+build:linux:rel:
+  before_script:
+    - uname -a
+    - apt-get update -qq && apt-get install -y cmake gcc g++ lcov
+build:windows:rel:
+  before_script:
+    - systeminfo
 
 
-before_script:
 
 variables:
   GIT_STRATEGY: clone
