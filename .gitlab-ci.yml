@@ -33,7 +33,7 @@ variables:
     - cd build
     - cmake ../ -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
     - cmake --build . --config $BUILD_TYPE --target install
-    - mv $CI_PROJECT_DIR/install $CI_PROJECT_DIR/$(eval echo ${BUILD_NAMING})
+    - mv $CI_PROJECT_DIR/build $CI_PROJECT_DIR/$(eval echo ${BUILD_NAMING})
 
 .test:linux:default: &test_linux_default
   script:
