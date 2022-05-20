@@ -22,7 +22,6 @@ if [ $4 == "rebuild" ]; then
 	 -DWRP_ROOT=$WRP_ROOT_ARG \
 	 -DCMAKE_INSTALL_PREFIX=../install \
 	 -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
-	 -DCODE_COVERAGE=ON \
 	 -DCMAKE_CXX_FLAGS_DEBUG="-g -O0 -Wpedantic -Wall -Wextra -Wnarrowing -pedantic -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=5 -Wundef -Wno-unused -Wno-variadic-macros -Wno-parentheses -fdiagnostics-show-option" \
 	 -DCMAKE_CXX_FLAGS="-fsanitize=address  -fsanitize=leak -g" \
 	 -DCMAKE_C_FLAGS="-fsanitize=address  -fsanitize=leak -g" \

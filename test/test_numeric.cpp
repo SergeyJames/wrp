@@ -1,8 +1,9 @@
 #include <gtest/gtest.h>
+#include <vector>
 #include <algorithms/numeric.h>
 
 void test_int() {
-	const std::array<int, 10> v{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	const std::vector<int> v{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	ASSERT_EQ(wrp::average(v), 4.5f);
 }
 
