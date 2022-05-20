@@ -1,26 +1,16 @@
+#################################
+####    @SergeyJames        #####
+#################################
+image: gcc
+
 stages:
   - build
   - test
 
-before_script:
-  build:linux:rel:
-  build:linux:dbg:
-    script:
-        - uname -a
-        - apt-get update -qq && apt-get install -y cmake gcc g++ lcov
-  windows:
-      script:
-      - systeminfo
-  debian:
-    script:
-      - uname -a
-
-
-before_script:
-
 variables:
   GIT_STRATEGY: clone
   GIT_SUBMODULE_STRATEGY: recursive
+  BUILD_NAMING: 'wrp_${BUILD_TYPE}_${CI_COMMIT_SHORT_SHA}'
   CMAKE_LINUX_DBG: >
     -DCMAKE_CXX_FLAGS=-fsanitize=address
     -DCMAKE_CXX_FLAGS=-fsanitize=leak
@@ -33,57 +23,85 @@ variables:
     -DCMAKE_MODULE_LINKER_FLAGS=-fsanitize=address
     -DCMAKE_MODULE_LINKER_FLAGS=-fsanitize=leak
 
+.build:linux:default: &build_linux_default
+  script:
+    - uname -a
+    - cat /proc/cpuinfo | grep 'model name'
+    - apt-get update -qq && apt-get install -y cmake gcc g++ lcov
+    - export dir=$(pwd)
+    - mkdir build install
+    - cd build
+    - cmake ../ -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+    - cmake --build . --config $BUILD_TYPE --target install
+    - mv $CI_PROJECT_DIR/install $CI_PROJECT_DIR/$(eval echo ${BUILD_NAMING})
 
+.test:linux:default: &test_linux_default
+  script:
+    - cd $CI_PROJECT_DIR/$(eval echo ${BUILD_NAMING})
+    - ./bin/unit_tests
+
+
+###########################
+#         RELEASE         #
+###########################
 build:linux:rel:
-    stage: build
-    tags: ['linux']
-    script:
-        - export dir=$(pwd)
-        - mkdir build install
-        - cd build
-        - export BUILD_TYPE=Release
-        - cmake ../ -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE
-        - cmake --build . --config $BUILD_TYPE --target install
-        - ./bin/unit_tests
-        - lcov --capture --directory . --output-file coverage.info
-        - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
-        - lcov --list coverage.info # debug info
-    # artifacts:
-    #   name: "$(eval echo $BUILD_TYPE)"
-    #   expire_in: 1 hour
-    #   when: always
-    #   paths:
-    #     - "$CI_PROJECT_DIR/output.txt"
+  stage: build
+  tags: ['linux']
+  variables:
+    BUILD_TYPE: Release
+  <<: *build_linux_default
+  only:
+    variables:
+    - $CI_COMMIT_MESSAGE =~ /build_all|build_rel/
+  artifacts:
+    name: "${BUILD_NAMING}"
+    expire_in: 5 min
+    paths:
+      - "$CI_PROJECT_DIR/$(eval echo ${BUILD_NAMING})"
 
+
+test:linux:rel:
+  stage: test
+  needs: ["build:linux:rel"]
+  tags: ['linux']
+  <<: *test_linux_default
+  variables:
+    BUILD_TYPE: Release
+  only:
+    variables:
+    - $CI_COMMIT_MESSAGE =~ /build_all|build_rel/
+  dependencies:
+    - build:linux:rel
+
+
+#########################
+#         DEBUG         #
+#########################
 build:linux:deb:
-    stage: build
-    tags: ['linux']
-    script:
-        - export dir=$(pwd)
-        - mkdir build install
-        - cd build
-        - export BUILD_TYPE=Debug
-        - cmake .. -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=$BUILD_TYPE $(eval echo $CMAKE_LINUX_DBG)
-        - cmake --build . --config $BUILD_TYPE --target install
-        - ./bin/unit_tests
-        - lcov --capture --directory . --output-file coverage.info
-        - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
-        - lcov --list coverage.info # debug info
-    # artifacts:
-    #   name: "$(eval echo $BUILD_TYPE)"
-    #   expire_in: 1 hour
-    #   when: always
-    #   paths:
-    #     - "$CI_PROJECT_DIR/output.txt"
+  stage: build
+  tags: ['linux']
+  variables:
+    BUILD_TYPE: Debug
+  <<: *build_linux_default
+  only:
+    variables:
+    - $CI_COMMIT_MESSAGE =~ /build_all|build_deb/
+  artifacts:
+    name: "${BUILD_NAMING}"
+    expire_in: 5 min
+    paths:
+      - "$CI_PROJECT_DIR/$(eval echo ${BUILD_NAMING})"
 
-build:windows:rel:
-    stage: build
-    tags: ['windows']
-    script:
-        - SET dir=%cd%
-        - mkdir build install
-        - cd build
-        - SET BUILD_TYPE=Release
-        - cmake ../ -DWRP_ROOT=$dir -DCMAKE_INSTALL_PREFIX=../install -DCMAKE_BUILD_TYPE=%BUILD_TYPE%
-        - cmake --build . --config %BUILD_TYPE% --target install
-        - .\bin\unit_tests
+test:linux:deb:
+  stage: test
+  needs: ["build:linux:deb"]
+  tags: ['linux']
+  <<: *test_linux_default
+  variables:
+    BUILD_TYPE: Debug
+  only:
+    variables:
+    - $CI_COMMIT_MESSAGE =~ /build_all|build_deb/
+  dependencies:
+    - build:linux:deb
+

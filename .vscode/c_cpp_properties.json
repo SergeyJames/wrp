@@ -1,0 +1,19 @@
+{
+  "configurations": [
+    {
+      "name": "Linux",
+      "includePath": [
+		  "${workspaceFolder}/**",
+		  "${workspaceFolder}/src/**",
+		  "/home/james/projects/wrp/build/googletest/**"
+		],
+      "defines": [ ],
+      "compilerPath": "/usr/bin/g++",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "clang-x64",
+      "configurationProvider": "go2sh.cmake-integration"
+    }
+  ],
+  "version": 4
+}
