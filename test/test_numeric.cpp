@@ -2,6 +2,8 @@
 #include <vector>
 #include <algorithms/numeric.h>
 
+#include  <algorithms/utilities/scopedtimer.hpp>
+
 void test_int() {
 	const std::vector<int> v{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	ASSERT_EQ(wrp::average(v), 4.5f);
@@ -33,6 +35,7 @@ void test_empty() {
 }
 
 TEST(Numeric, average) {
+	wrp::ScopedTimer<std::chrono::nanoseconds> tm{true, "Numeric.average"};
 	test_int();
 	test_float();
 	test_double();

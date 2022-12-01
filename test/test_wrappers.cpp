@@ -1,10 +1,10 @@
 #include "gtest/gtest.h"
 #include "algorithms/algorithms.h"
 
-#include  "algorithms/utilities/scopedtimer.hpp"
+#include  <algorithms/utilities/scopedtimer.hpp>
 
 TEST(Algorithms, contains) {
-	wrp::ScopedTimer<std::chrono::nanoseconds> tm{true};
+	wrp::ScopedTimer<std::chrono::nanoseconds> tm{true, "Algorithms.contains"};
 	std::vector<int> v{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 	ASSERT_TRUE (wrp::contains(v.cbegin(), v.cend(), 1));
 	ASSERT_FALSE(wrp::contains(v.cbegin(), v.cend(), 42));
@@ -21,7 +21,7 @@ TEST(Algorithms, contains) {
 
 
 TEST(Algorithms, contains_if) {
-	wrp::ScopedTimer tm{true};
+	wrp::ScopedTimer<std::chrono::nanoseconds> tm{true, "Algorithms.contains_if"};
 	std::vector<int> v{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 	auto lmb1 = [](int a){ return a == 1;   };
 	auto lmb42 = [](int a){ return a == 42; };
